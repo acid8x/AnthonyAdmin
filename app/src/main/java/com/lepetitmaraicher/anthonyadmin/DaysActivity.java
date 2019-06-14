@@ -299,7 +299,7 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected String doInBackground(final String... params) {
-            connection = new Connection("acid8x.no-ip.biz", "anthony", "anthony", 3306, "anthony", new IConnectionInterface() {
+            connection = new Connection(Constants.IP, Constants.LOGIN, Constants.PASSWORD, 3306, Constants.DB, new IConnectionInterface() {
 
                 @Override
                 public void actionCompleted() {
