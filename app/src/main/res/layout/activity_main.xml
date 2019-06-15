@@ -10,6 +10,38 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:text="Version 1"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="10dp"
+            android:textColor="#000"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:text="Anthony Admin"
+            android:textSize="32sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
@@ -21,11 +53,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
+            android:textStyle="bold"
             android:text="Modifier un employé"
             android:textSize="18sp"/>
 
@@ -35,11 +68,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
+            android:textStyle="bold"
             android:text="Liste des punchs d'un employe"
             android:textSize="18sp"/>
 
@@ -49,11 +83,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
+            android:textStyle="bold"
             android:text="Liste des punchs d'aujourd'hui"
             android:textSize="18sp"/>
 
@@ -62,11 +97,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
+            android:textStyle="bold"
             android:text="Punchs de journees specifique"
             android:textColor="#000"
             android:textSize="18sp" />
@@ -77,11 +113,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
+            android:textStyle="bold"
             android:text="Liste de tout les punchs"
             android:textSize="18sp"/>
 
@@ -89,12 +126,12 @@
 
     <Button
         android:id="@+id/bQuitter"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
         android:layout_margin="20dp"
         android:textColor="#000"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:padding="15dp"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="3"

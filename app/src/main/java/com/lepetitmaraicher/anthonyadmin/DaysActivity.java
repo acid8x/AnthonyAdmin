@@ -17,15 +17,15 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.BoardiesITSolutions.AndroidMySQLConnector.Connection;
-import com.BoardiesITSolutions.AndroidMySQLConnector.Exceptions.InvalidSQLPacketException;
-import com.BoardiesITSolutions.AndroidMySQLConnector.Exceptions.MySQLConnException;
-import com.BoardiesITSolutions.AndroidMySQLConnector.Exceptions.MySQLException;
-import com.BoardiesITSolutions.AndroidMySQLConnector.IConnectionInterface;
-import com.BoardiesITSolutions.AndroidMySQLConnector.IResultInterface;
-import com.BoardiesITSolutions.AndroidMySQLConnector.MySQLRow;
-import com.BoardiesITSolutions.AndroidMySQLConnector.ResultSet;
-import com.BoardiesITSolutions.AndroidMySQLConnector.Statement;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.Connection;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.InvalidSQLPacketException;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLConnException;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLException;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IConnectionInterface;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IResultInterface;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLRow;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.ResultSet;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.Statement;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
