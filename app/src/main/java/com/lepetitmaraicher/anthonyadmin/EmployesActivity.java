@@ -1,7 +1,12 @@
 package com.lepetitmaraicher.anthonyadmin;
 
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -36,6 +41,7 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
     Button bRetour, bOK;
     LinearLayout progressLL;
     Space space;
+    Drawable buttonBackground;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,19 +67,28 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
         finish();
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.bOK) {
-            setResult(RESULT_OK);
-            String user = values[selectedId];
-            for (User u : users) {
-                if (u.getBadgeName().equals(user)) {
-                    MainActivity.user = u;
-                    break;
-                }
+    public void onClick(final View v) {
+        buttonBackground = v.getBackground();
+        buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
+        v.setBackground(buttonBackground);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                buttonBackground.clearColorFilter();
+                v.setBackground(buttonBackground);
+                if (v.getId() == R.id.bOK) {
+                    setResult(RESULT_OK);
+                    String user = values[selectedId];
+                    for (User u : users) {
+                        if (u.getBadgeName().equals(user)) {
+                            MainActivity.user = u;
+                            break;
+                        }
+                    }
+                } else setResult(RESULT_CANCELED);
+                finish();
             }
-        } else setResult(RESULT_CANCELED);
-        finish();
+        }, 650);
     }
 
     public void setListView() {

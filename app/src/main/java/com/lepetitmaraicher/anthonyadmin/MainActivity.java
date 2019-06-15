@@ -4,6 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -26,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bEmployes, bDayPunchs, bEmployePunchs, bAllPunchs, bDaysPunchs, bQuitter;
     boolean doubleBackToExitPressedOnce = false;
     PermissionsManager permissionsManager;
+    Drawable buttonBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,13 +124,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View v) {
-        final Button b = findViewById(v.getId());
-        b.setTextColor(Color.RED);
-        b.setScaleX(1.2f);
-        b.setScaleY(1.2f);
+        buttonBackground = v.getBackground();
+        buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
+        v.setBackground(buttonBackground);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                buttonBackground.clearColorFilter();
+                v.setBackground(buttonBackground);
                 Intent i;
                 switch (v.getId()) {
                     case R.id.bEmployes:
@@ -153,9 +160,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         onDestroy();
                         break;
                 }
-                b.setTextColor(Color.BLACK);
-                b.setScaleX(1);
-                b.setScaleY(1);
             }
         }, 650);
     }

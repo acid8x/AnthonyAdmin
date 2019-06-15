@@ -44,47 +44,41 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/bRetour"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
             android:text="Retour"/>
+
         <Space
             android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
         <Button
             android:id="@+id/bOK"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
             android:textSize="18sp"
+            android:textStyle="bold"
             android:textColor="#000"
-            android:paddingTop="15dp"
-            android:paddingBottom="15dp"
             android:shadowDx="3"
             android:shadowDy="3"
             android:shadowRadius="3"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:visibility="gone"
             android:text="OK"/>
-        <Space
-            android:id="@+id/spacer"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

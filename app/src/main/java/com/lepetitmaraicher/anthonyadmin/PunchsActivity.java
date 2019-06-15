@@ -2,6 +2,8 @@ package com.lepetitmaraicher.anthonyadmin;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,6 +56,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
     LinearLayout progressLL;
     TextView tvDuplicate;
     Switch swDuplicate;
+    Drawable buttonBackground;
     List<String> sList, sListCombined;
     String oui = "OUI", non = "NON";
     boolean firstRun = true;
@@ -188,22 +191,20 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(final View v) {
-        final Button b = findViewById(v.getId());
-        b.setTextColor(Color.RED);
-        b.setScaleX(1.2f);
-        b.setScaleY(1.2f);
+        buttonBackground = v.getBackground();
+        buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
+        v.setBackground(buttonBackground);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                buttonBackground.clearColorFilter();
+                v.setBackground(buttonBackground);
                 if (v.getId() == R.id.bRetourPunchs) {
                     setResult(RESULT_OK);
                     finish();
                 } else if (v.getId() == R.id.bExcelPunchs) {
                     saveExcelFile();
                 }
-                b.setTextColor(Color.BLACK);
-                b.setScaleX(1);
-                b.setScaleY(1);
             }
         }, 650);
     }
