@@ -1,7 +1,6 @@
 package com.lepetitmaraicher.anthonyadmin;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -16,13 +15,14 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Space;
+import android.widget.Toast;
 
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.Connection;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IConnectionInterface;
+import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IResultInterface;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.InvalidSQLPacketException;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLConnException;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLException;
-import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IConnectionInterface;
-import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.IResultInterface;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.MySQLRow;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.ResultSet;
 import com.lepetitmaraicher.anthonyadmin.AndroidMySQLConnector.Statement;
@@ -32,35 +32,58 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployesActivity extends AppCompatActivity implements View.OnClickListener {
+public class DatabaseActivity extends AppCompatActivity implements View.OnClickListener {
 
-    List<User> users;
-    ListView listView;
-    int selectedId = -1;
-    String[] values;
-    Button bRetour, bOK;
-    LinearLayout progressLL;
-    Space space;
+    Button bEraseUsers, bErasePunchs, bRetour3;
+    LinearLayout progressLL3, llDatabase;
     Drawable buttonBackground;
-    boolean done = true;
+    LongOperation longOperation;
+    String query = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setResult(RESULT_CANCELED);
-        setContentView(R.layout.activity_employes);
+        setContentView(R.layout.activity_database);
         setRequestedOrientation(MainActivity.activityInfo);
         MainActivity.user = null;
-        bRetour = findViewById(R.id.bRetour);
-        bRetour.setOnClickListener(this);
-        bOK = findViewById(R.id.bOK);
-        bOK.setOnClickListener(this);
-        progressLL = findViewById(R.id.progressLL);
-        space = findViewById(R.id.spacer);
-        listView = findViewById(R.id.listView);
-        LongOperation longOperation = new LongOperation(this);
-        done = false;
-        longOperation.execute("SELECT * FROM users");
+        bEraseUsers = findViewById(R.id.bEraseUsers);
+        bEraseUsers.setOnClickListener(this);
+        bErasePunchs = findViewById(R.id.bErasePunchs);
+        bErasePunchs.setOnClickListener(this);
+        bRetour3 = findViewById(R.id.bRetour3);
+        bRetour3.setOnClickListener(this);
+        progressLL3 = findViewById(R.id.progressLL3);
+        llDatabase = findViewById(R.id.llDatabase);
+        longOperation = new LongOperation(this);
+    }
+
+    public void onDone(boolean done) {
+        if (!done) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(DatabaseActivity.this, "Operation impossible pour l'instant", Toast.LENGTH_SHORT).show();
+                    progressLL3.setVisibility(View.GONE);
+                    llDatabase.setVisibility(View.VISIBLE);
+                }
+            });
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
+
+    public void sendQuery(String queryStatement) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                progressLL3.setVisibility(View.VISIBLE);
+                llDatabase.setVisibility(View.GONE);
+            }
+        });
+        query = queryStatement;
+        longOperation.execute(query);
     }
 
     @Override
@@ -70,7 +93,6 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void onClick(final View v) {
-        if (!done) return;
         buttonBackground = v.getBackground();
         buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
         v.setBackground(buttonBackground);
@@ -79,55 +101,24 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 buttonBackground.clearColorFilter();
                 v.setBackground(buttonBackground);
-                if (v.getId() == R.id.bOK) {
-                    setResult(RESULT_OK);
-                    String user = values[selectedId];
-                    for (User u : users) {
-                        if (u.getBadgeName().equals(user)) {
-                            MainActivity.user = u;
-                            break;
-                        }
-                    }
-                } else setResult(RESULT_CANCELED);
-                finish();
+                if (v.getId() == R.id.bEraseUsers) {
+                    sendQuery("TRUNCATE TABLE users");
+                } else if (v.getId() == R.id.bErasePunchs) {
+                    sendQuery("TRUNCATE TABLE punchs");
+                } else {
+                    setResult(RESULT_CANCELED);
+                    finish();
+                }
             }
         }, 650);
     }
 
-    public void setListView() {
-        done = true;
-        final AppCompatActivity activity = this;
-        List<String> list = new ArrayList<>();
-        for (User u : users) {
-            list.add(u.getBadgeName());
-        }
-        values = list.toArray(new String[0]);
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressLL.setVisibility(View.GONE);
-                listView.setAdapter(new ArrayAdapter<>(activity, android.R.layout.simple_list_item_1, android.R.id.text1, values));
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (selectedId == -1) {
-                            bOK.setVisibility(View.VISIBLE);
-                            space.setVisibility(View.GONE);
-                        }
-                        selectedId = position;
-                    }
-                });
-                listView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
     static class LongOperation extends AsyncTask<String, String, String> {
 
-        private WeakReference<EmployesActivity> employesActivityWeakReference;
+        private WeakReference<DatabaseActivity> employesActivityWeakReference;
         private Connection connection;
 
-        LongOperation(EmployesActivity employesActivityWeakReference) {
+        LongOperation(DatabaseActivity employesActivityWeakReference) {
             this.employesActivityWeakReference = new WeakReference<>(employesActivityWeakReference);
         }
 
@@ -138,53 +129,40 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void actionCompleted() {
                     Statement statement = connection.createStatement();
-                    statement.executeQuery(params[0], new IResultInterface() {
+                    statement.execute(params[0], new IConnectionInterface() {
                         @Override
-                        public void executionComplete(ResultSet resultSet) {
-                            MySQLRow row;
-                            List<User> users = new ArrayList<>();
-                            while ((row = resultSet.getNextRow()) != null) {
-                                try {
-                                    String badge = row.getString("badgeId");
-                                    String name = row.getString("badgeName");
-                                    String lastPunchString = row.getString("lastPunch");
-                                    long lastPunch = Long.parseLong(lastPunchString);
-                                    String currentJob = row.getString("currentJob");
-                                    if (currentJob == null) currentJob = "";
-                                    int isAdmin = row.getInt("isAdmin");
-                                    User user = new User(badge, name, lastPunch, currentJob, isAdmin);
-                                    users.add(user);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            employesActivityWeakReference.get().users = users;
-                            employesActivityWeakReference.get().setListView();
+                        public void actionCompleted() {
+                            employesActivityWeakReference.get().onDone(true);
                         }
 
                         @Override
                         public void handleInvalidSQLPacketException(InvalidSQLPacketException ex) {
                             ex.printStackTrace();
+                            employesActivityWeakReference.get().onDone(false);
                         }
 
                         @Override
                         public void handleMySQLException(MySQLException ex) {
                             ex.printStackTrace();
+                            employesActivityWeakReference.get().onDone(false);
                         }
 
                         @Override
                         public void handleIOException(IOException ex) {
                             ex.printStackTrace();
+                            employesActivityWeakReference.get().onDone(false);
                         }
 
                         @Override
                         public void handleMySQLConnException(MySQLConnException ex) {
                             ex.printStackTrace();
+                            employesActivityWeakReference.get().onDone(false);
                         }
 
                         @Override
                         public void handleException(Exception ex) {
                             ex.printStackTrace();
+                            employesActivityWeakReference.get().onDone(false);
                         }
                     });
                 }
@@ -192,26 +170,31 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void handleInvalidSQLPacketException(InvalidSQLPacketException ex) {
                     ex.printStackTrace();
+                    employesActivityWeakReference.get().onDone(false);
                 }
 
                 @Override
                 public void handleMySQLException(MySQLException ex) {
                     ex.printStackTrace();
+                    employesActivityWeakReference.get().onDone(false);
                 }
 
                 @Override
                 public void handleIOException(IOException ex) {
                     ex.printStackTrace();
+                    employesActivityWeakReference.get().onDone(false);
                 }
 
                 @Override
                 public void handleMySQLConnException(MySQLConnException ex) {
                     ex.printStackTrace();
+                    employesActivityWeakReference.get().onDone(false);
                 }
 
                 @Override
                 public void handleException(Exception ex) {
                     ex.printStackTrace();
+                    employesActivityWeakReference.get().onDone(false);
                 }
             });
             return params[0];

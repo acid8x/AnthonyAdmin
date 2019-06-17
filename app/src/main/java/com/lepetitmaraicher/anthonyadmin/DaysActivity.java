@@ -62,7 +62,7 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
     Switch swDuplicate;
     Drawable buttonBackground;
     String oui = "OUI", non = "NON";
-    boolean firstRun = true;
+    boolean firstRun = true, done = true;
     List<String> datePicked, sList, sListCombined;
     DatePicker picker;
     LongOperation longOperation;
@@ -75,13 +75,7 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_dayspunchs);
         setRequestedOrientation(MainActivity.activityInfo);
         bRetour = findViewById(R.id.bRetourPunchs2);
-        bRetour.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                finish();
-            }
-        });
+        bRetour.setOnClickListener(this);
         bExcel = findViewById(R.id.bExcelPunchs2);
         bExcel.setOnClickListener(this);
         bExcel.setEnabled(false);
@@ -126,6 +120,7 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                     query.append(")");
+                    done = false;
                     longOperation.execute(query.toString());
                 }
             }
@@ -134,6 +129,7 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(final View v) {
+        if (!done) return;
         buttonBackground = v.getBackground();
         buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
         v.setBackground(buttonBackground);
@@ -266,12 +262,12 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
         intentShareFile.setType("application/excel");
         intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+file.getAbsolutePath()));
         startActivity(Intent.createChooser(intentShareFile, "Share File"));
-        // TODO: 2019-06-08 FileUriExposedException
     }
 
     private boolean isOdd( int val ) { return (val & 0x01) != 0; }
 
     public void setListView(List<String> list) {
+        done = true;
         final AppCompatActivity activity = this;
         values = list.toArray(new String[0]);
         runOnUiThread(new Runnable() {

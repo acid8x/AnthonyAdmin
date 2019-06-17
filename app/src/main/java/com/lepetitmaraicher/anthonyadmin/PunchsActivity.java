@@ -59,7 +59,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
     Drawable buttonBackground;
     List<String> sList, sListCombined;
     String oui = "OUI", non = "NON";
-    boolean firstRun = true;
+    boolean firstRun = true, done = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +95,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
         progressLL = findViewById(R.id.progressLLpunchs);
         listView = findViewById(R.id.listViewPunchs);
         LongOperation longOperation = new LongOperation(this);
+        done = false;
         longOperation.execute(query);
     }
 
@@ -191,6 +192,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(final View v) {
+        if (!done) return;
         buttonBackground = v.getBackground();
         buttonBackground.setColorFilter(Color.argb(127,255,0,0), PorterDuff.Mode.MULTIPLY);
         v.setBackground(buttonBackground);
@@ -210,6 +212,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public void setListView(List<String> list) {
+        done = true;
         final AppCompatActivity activity = this;
         values = list.toArray(new String[0]);
         runOnUiThread(new Runnable() {

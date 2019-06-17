@@ -1,19 +1,18 @@
 package com.lepetitmaraicher.anthonyadmin;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,16 +27,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static int activityInfo = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
 
     public static User user = null;
-    Button bEmployes, bDayPunchs, bEmployePunchs, bAllPunchs, bDaysPunchs, bQuitter;
-    boolean doubleBackToExitPressedOnce = false;
+    Button bEmployes, bDayPunchs, bEmployePunchs, bAllPunchs, bDaysPunchs, bQuitter, bDatabase;
+    boolean doubleBackToExitPressedOnce = false, databaseEnable = false;
     PermissionsManager permissionsManager;
     Drawable buttonBackground;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setRequestedOrientation(activityInfo);
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
         permissionsManager = PermissionsManager.getInstance();
         permissionsManager.requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
@@ -55,18 +57,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 e.printStackTrace();
             }
         }
+        float f = metrics.widthPixels/21;
+        f/=metrics.scaledDensity;
         bEmployes = findViewById(R.id.bEmployes);
+        bEmployes.setTextSize(f);
         bEmployes.setOnClickListener(this);
         bDayPunchs = findViewById(R.id.bDayPunchs);
+        bDayPunchs.setTextSize(f);
         bDayPunchs.setOnClickListener(this);
         bDaysPunchs = findViewById(R.id.bDaysPunchs);
+        bDaysPunchs.setTextSize(f);
         bDaysPunchs.setOnClickListener(this);
         bEmployePunchs = findViewById(R.id.bEmployePunchs);
+        bEmployePunchs.setTextSize(f);
         bEmployePunchs.setOnClickListener(this);
         bAllPunchs = findViewById(R.id.bAllPunchs);
+        bAllPunchs.setTextSize(f);
         bAllPunchs.setOnClickListener(this);
         bQuitter = findViewById(R.id.bQuitter);
+        bQuitter.setTextSize(f);
         bQuitter.setOnClickListener(this);
+        bDatabase = findViewById(R.id.bDatabase);
+        bDatabase.setTextSize(f);
+        bDatabase.setOnTouchListener(new TouchTimer() {
+            @Override
+            public void onTouchEnded(boolean time) {
+                if (time) {
+                    if (databaseEnable) {
+                        databaseEnable = false;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                bDatabase.setAlpha(0.15f);
+                            }
+                        });
+                        startActivityForResult(new Intent(MainActivity.this, DatabaseActivity.class), 4);
+                    } else {
+                        databaseEnable = true;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                bDatabase.setAlpha(1f);
+                            }
+                        });
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                databaseEnable = false;
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        bDatabase.setAlpha(0.15f);
+                                    }
+                                });
+                            }
+                        },3000);
+                    }
+                }
+            }
+        });
     }
 
     public static String getDateTime() {

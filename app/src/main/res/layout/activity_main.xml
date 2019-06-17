@@ -48,122 +48,148 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="vertical">
 
-        <me.grantland.widget.AutofitLayout
+        <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="15dp"
-            autofit:minTextSize="12sp">
+            android:layout_weight="1"/>
 
-            <Button
-                android:id="@+id/bEmployes"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
-                android:textStyle="bold"
-                android:textSize="56sp"
-                android:singleLine="true"
-                android:text="Modifier un employé"/>
-
-        </me.grantland.widget.AutofitLayout>
-
-        <me.grantland.widget.AutofitLayout
+        <Button
+            android:id="@+id/bEmployes"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="15dp"
-            autofit:minTextSize="12sp">
+            android:layout_weight="3"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Modifier un employé"/>
 
-            <Button
-                android:id="@+id/bEmployePunchs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
-                android:textStyle="bold"
-                android:textSize="56sp"
-                android:singleLine="true"
-                android:text="Liste des punchs d'un employe"/>
-
-        </me.grantland.widget.AutofitLayout>
-
-        <me.grantland.widget.AutofitLayout
+        <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="15dp"
-            autofit:minTextSize="12sp">
+            android:layout_weight="1"/>
 
-            <Button
-                android:id="@+id/bDayPunchs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
-                android:textStyle="bold"
-                android:textSize="56sp"
-                android:singleLine="true"
-                android:text="Liste des punchs d'aujourd'hui"/>
-
-        </me.grantland.widget.AutofitLayout>
-
-        <me.grantland.widget.AutofitLayout
+        <Button
+            android:id="@+id/bEmployePunchs"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="15dp"
-            autofit:minTextSize="12sp">
+            android:layout_weight="3"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Liste des punchs d'un employe"/>
 
-            <Button
-                android:id="@+id/bDaysPunchs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
-                android:textStyle="bold"
-                android:textSize="56sp"
-                android:singleLine="true"
-                android:text="Punchs de journees specifique"/>
-
-        </me.grantland.widget.AutofitLayout>
-
-        <me.grantland.widget.AutofitLayout
+        <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_margin="15dp"
-            autofit:minTextSize="12sp">
+            android:layout_weight="1"/>
 
-            <Button
-                android:id="@+id/bAllPunchs"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:shadowDx="3"
-                android:shadowDy="3"
-                android:shadowRadius="3"
-                android:textStyle="bold"
-                android:textSize="56sp"
-                android:singleLine="true"
-                android:text="Liste de tout les punchs"/>
+        <Button
+            android:id="@+id/bDayPunchs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Liste des punchs d'aujourd'hui"/>
 
-        </me.grantland.widget.AutofitLayout>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/bDaysPunchs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Punchs de journees specifique"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/bAllPunchs"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Liste de tout les punchs"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/bDatabase"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:backgroundTint="#CC0"
+            android:alpha="0.15"
+            android:textColor="#000"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:shadowDx="3"
+            android:shadowDy="3"
+            android:shadowRadius="3"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:text="Gestion de la base de donnees"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
     </LinearLayout>
 
@@ -172,9 +198,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_margin="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#888"
         android:textColor="#000"
-        android:padding="10dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:shadowDx="3"
         android:shadowDy="3"
         android:shadowRadius="3"

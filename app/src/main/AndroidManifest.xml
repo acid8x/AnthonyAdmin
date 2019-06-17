@@ -25,6 +25,7 @@
         <activity android:name=".EmployesActivity" />
         <activity android:name=".PunchsActivity" />
         <activity android:name=".DaysActivity" />
+        <activity android:name=".DatabaseActivity" />
     </application>
 
 </manifest>
