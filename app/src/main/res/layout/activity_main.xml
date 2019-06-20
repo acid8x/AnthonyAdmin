@@ -173,7 +173,6 @@
             android:layout_height="0dp"
             android:layout_weight="3"
             android:backgroundTint="#CC0"
-            android:alpha="0.15"
             android:textColor="#000"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"

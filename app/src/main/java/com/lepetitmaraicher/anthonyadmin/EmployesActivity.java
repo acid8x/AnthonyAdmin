@@ -1,7 +1,6 @@
 package com.lepetitmaraicher.anthonyadmin;
 
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -51,13 +50,13 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_employes);
         setRequestedOrientation(MainActivity.activityInfo);
         MainActivity.user = null;
-        bRetour = findViewById(R.id.bRetour);
+        bRetour = findViewById(R.id.bRetourEmployes);
         bRetour.setOnClickListener(this);
-        bOK = findViewById(R.id.bOK);
+        bOK = findViewById(R.id.bOkEmployes);
         bOK.setOnClickListener(this);
-        progressLL = findViewById(R.id.progressLL);
+        progressLL = findViewById(R.id.llProgressEmployes);
         space = findViewById(R.id.spacer);
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.listViewEmployes);
         LongOperation longOperation = new LongOperation(this);
         done = false;
         longOperation.execute("SELECT * FROM users");
@@ -79,7 +78,7 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
             public void run() {
                 buttonBackground.clearColorFilter();
                 v.setBackground(buttonBackground);
-                if (v.getId() == R.id.bOK) {
+                if (v.getId() == R.id.bOkEmployes) {
                     setResult(RESULT_OK);
                     String user = values[selectedId];
                     for (User u : users) {
@@ -110,10 +109,6 @@ public class EmployesActivity extends AppCompatActivity implements View.OnClickL
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (selectedId == -1) {
-                            bOK.setVisibility(View.VISIBLE);
-                            space.setVisibility(View.GONE);
-                        }
                         selectedId = position;
                     }
                 });

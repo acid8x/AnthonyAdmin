@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listViewEmployes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -18,7 +18,7 @@
         android:listSelector="#F8CF"/>
 
     <LinearLayout
-        android:id="@+id/progressLL"
+        android:id="@+id/llProgressEmployes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -48,7 +48,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bRetour"
+            android:id="@+id/bRetourEmployes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -67,7 +67,7 @@
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/bOK"
+            android:id="@+id/bOkEmployes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"

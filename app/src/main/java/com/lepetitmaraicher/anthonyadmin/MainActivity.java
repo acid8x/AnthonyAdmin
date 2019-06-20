@@ -79,43 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bQuitter.setOnClickListener(this);
         bDatabase = findViewById(R.id.bDatabase);
         bDatabase.setTextSize(f);
-        bDatabase.setOnTouchListener(new TouchTimer() {
-            @Override
-            public void onTouchEnded(boolean time) {
-                if (time) {
-                    if (databaseEnable) {
-                        databaseEnable = false;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                bDatabase.setAlpha(0.15f);
-                            }
-                        });
-                        startActivityForResult(new Intent(MainActivity.this, DatabaseActivity.class), 4);
-                    } else {
-                        databaseEnable = true;
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                bDatabase.setAlpha(1f);
-                            }
-                        });
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                databaseEnable = false;
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        bDatabase.setAlpha(0.15f);
-                                    }
-                                });
-                            }
-                        },3000);
-                    }
-                }
-            }
-        });
+        bDatabase.setOnClickListener(this);
     }
 
     public static String getDateTime() {
@@ -158,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (requestCode) {
             case 0:
                 if (resultCode == Activity.RESULT_OK) {
-                    // TODO: 2019-06-03 START USER EDIT ACTIVITY
+                    startActivityForResult(new Intent(MainActivity.this, UserEditActivity.class), 4);
                 }
                 break;
             case 1:
@@ -204,6 +168,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         i = new Intent(MainActivity.this, PunchsActivity.class);
                         i.putExtra("QUERY", "SELECT * FROM punchs");
                         startActivityForResult(i, 2);
+                        break;
+                    case R.id.bDatabase:
+                        startActivityForResult(new Intent(MainActivity.this, DatabaseActivity.class), 4);
                         break;
                     case R.id.bQuitter:
                         onDestroy();

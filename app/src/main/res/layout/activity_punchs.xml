@@ -18,7 +18,7 @@
         android:listSelector="#F8CF"/>
 
     <LinearLayout
-        android:id="@+id/progressLLpunchs"
+        android:id="@+id/llProgressPunchs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/tvDuplicate"
+                android:id="@+id/tvDuplicatePunchs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="5dp"
@@ -90,7 +90,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
             <Switch
-                android:id="@+id/swDuplicate"
+                android:id="@+id/swDuplicatePunchs"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"/>

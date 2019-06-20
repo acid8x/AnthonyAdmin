@@ -76,8 +76,8 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
         bExcel = findViewById(R.id.bExcelPunchs);
         bExcel.setOnClickListener(this);
         bExcel.setEnabled(false);
-        tvDuplicate = findViewById(R.id.tvDuplicate);
-        swDuplicate = findViewById(R.id.swDuplicate);
+        tvDuplicate = findViewById(R.id.tvDuplicatePunchs);
+        swDuplicate = findViewById(R.id.swDuplicatePunchs);
         swDuplicate.setEnabled(false);
         swDuplicate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -92,7 +92,7 @@ public class PunchsActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-        progressLL = findViewById(R.id.progressLLpunchs);
+        progressLL = findViewById(R.id.llProgressPunchs);
         listView = findViewById(R.id.listViewPunchs);
         LongOperation longOperation = new LongOperation(this);
         done = false;

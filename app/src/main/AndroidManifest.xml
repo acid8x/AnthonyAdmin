@@ -25,7 +25,9 @@
         <activity android:name=".EmployesActivity" />
         <activity android:name=".PunchsActivity" />
         <activity android:name=".DaysActivity" />
-        <activity android:name=".DatabaseActivity" />
+        <activity android:name=".DatabaseActivity"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity android:name=".UserEditActivity" />
     </application>
 
 </manifest>

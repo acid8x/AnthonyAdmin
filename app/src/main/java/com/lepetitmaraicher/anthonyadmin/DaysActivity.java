@@ -74,13 +74,13 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
         setResult(RESULT_CANCELED);
         setContentView(R.layout.activity_dayspunchs);
         setRequestedOrientation(MainActivity.activityInfo);
-        bRetour = findViewById(R.id.bRetourPunchs2);
+        bRetour = findViewById(R.id.bRetourDaysPunchs);
         bRetour.setOnClickListener(this);
-        bExcel = findViewById(R.id.bExcelPunchs2);
+        bExcel = findViewById(R.id.bExcelDaysPunchs);
         bExcel.setOnClickListener(this);
         bExcel.setEnabled(false);
-        tvDuplicate = findViewById(R.id.tvDuplicate2);
-        swDuplicate = findViewById(R.id.swDuplicate2);
+        tvDuplicate = findViewById(R.id.tvDuplicateDaysPunchs);
+        swDuplicate = findViewById(R.id.swDuplicateDaysPunchs);
         swDuplicate.setEnabled(false);
         swDuplicate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -95,9 +95,9 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-        listView = findViewById(R.id.listViewPunchs2);
-        progressLL = findViewById(R.id.progressLLpunchs2);
-        datePickerLL = findViewById(R.id.datePickerLL);
+        listView = findViewById(R.id.listViewDaysPunchs);
+        progressLL = findViewById(R.id.llProgressDaysPunchs);
+        datePickerLL = findViewById(R.id.llDatePickerDaysPunchs);
         longOperation = new LongOperation(this);
         picker = findViewById(R.id.main_dp);
         picker.setDate(getYear(),getMonth());
@@ -138,10 +138,10 @@ public class DaysActivity extends AppCompatActivity implements View.OnClickListe
             public void run() {
                 buttonBackground.clearColorFilter();
                 v.setBackground(buttonBackground);
-                if (v.getId() == R.id.bRetourPunchs2) {
+                if (v.getId() == R.id.bRetourDaysPunchs) {
                     setResult(RESULT_OK);
                     finish();
-                } else if (v.getId() == R.id.bExcelPunchs2) {
+                } else if (v.getId() == R.id.bExcelDaysPunchs) {
                     saveExcelFile();
                 }
             }
