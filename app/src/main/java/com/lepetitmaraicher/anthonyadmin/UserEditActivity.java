@@ -143,6 +143,9 @@ public class UserEditActivity extends AppCompatActivity implements View.OnClickL
                 } else onDone(true);
                 break;
             case R.id.bEffacerUserEdit:
+                llEditUser.setVisibility(View.GONE);
+                resultLL.setVisibility(View.GONE);
+                progressLL4.setVisibility(View.VISIBLE);
                 String sendString = "DELETE FROM users WHERE badgeId='" + MainActivity.user.getBadgeId() + "'";
                 longOperation.execute(sendString);
                 break;
